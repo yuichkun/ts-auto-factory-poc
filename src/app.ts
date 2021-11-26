@@ -1,13 +1,11 @@
-import { createMock } from 'ts-auto-mock';
+import { OrganizationFactory } from "./factory/organization";
+import JSONFormatter from 'json-formatter-js'
 
-interface Person {
-    id: string;
-    getName(): string;
-    details: {
-        phone: number
-    }
+
+window.addEventListener('DOMContentLoaded', main);
+
+function main() {
+    const organization = OrganizationFactory.withUsers(3).build();
+    const formatter = new JSONFormatter(organization);
+    document.body.appendChild(formatter.render());
 }
-const mock = createMock<Person>();
-console.log(mock)
-mock.getName() // ""
-mock.details // "{ phone: 0 }"
